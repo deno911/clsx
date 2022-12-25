@@ -1,0 +1,43 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "lib": [
+      "deno.ns",
+      "deno.window",
+      "dom",
+      "dom.iterable",
+      "dom.asynciterable",
+      "esnext"
+    ],
+    "types": [
+      "mod.d.ts"
+    ]
+  },
+  "importMap": "./import_map.json",
+  "tasks": {
+    "release": "{ deno fmt; deno lint --unstable; deno test -A --unstable --no-check; } && deno run -A --unstable https://deno.land/x/pub/cli.ts"
+  },
+  "lint": {
+    "files": {
+      "exclude": [
+        ".{devcontainer,vscode,github,gitpod.yml}",
+        "version.ts",
+        "egg.json"
+      ]
+    }
+  },
+  "fmt": {
+    "files": {
+      "exclude": [
+        ".{devcontainer,vscode,github}"
+      ]
+    },
+    "options": {
+      "indentWidth": 2,
+      "lineWidth": 80,
+      "proseWrap": "preserve",
+      "singleQuote": false,
+      "useTabs": false
+    }
+  }
+}

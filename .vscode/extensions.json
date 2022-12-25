@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    "denoland.vscode-deno",
+    "editorconfig.editorconfig",
+    "GitHub.codespaces",
+    "vsls-contrib.gistfs",
+    "sdras.night-owl",
+    "redhat.vscode-yaml",
+    "antfu.iconify",
+    "antfu.browse-lite",
+    "bierner.markdown-preview-github-styles"
+  ]
+}

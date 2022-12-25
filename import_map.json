@@ -1,0 +1,8 @@
+{
+  "imports": {
+    "std/": "https://deno.land/std@0.159.0/",
+    "dax": "https://deno.land/x/dax@0.12.0/mod.ts",
+    "this": "https://deno.land/x/this@0.153.0/mod.ts",
+    "dis": "https://deno.land/x/dis@0.0.1/mod.ts"
+  }
+}

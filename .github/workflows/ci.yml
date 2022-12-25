@@ -1,0 +1,63 @@
+name: "🦕 Deno CI"
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+defaults:
+  run:
+    shell: bash
+    working-directory: ./
+
+permissions:
+  contents: read
+
+jobs:
+  deno:
+    runs-on: ${{matrix.os}}
+    # Continue in case the canary run does not succeed
+    continue-on-error: ${{matrix.canary}}
+    # env:
+    #   DENO_DIR: .deno-cache
+    #   CACHE_VERSION: ${{secrets.CACHE_VERSION}}
+    strategy:
+      matrix:
+        os: [ ubuntu-20.04, macos-11, windows-2019 ]
+        deno: [ v1.x ]
+        canary: [ false ]
+        include:
+          - deno: canary
+            os: ubuntu-20.04
+            canary: true
+    steps:
+      - name: "(env) gitconfig"
+        run: |
+          sudo git config --system core.autocrlf false
+          sudo git config --system core.eol lf
+
+      - name: "(cache) setup"
+        uses: actions/cache@v2
+        with:
+          path: ${{env.DENO_DIR}}
+          key: deno911-${{hashFiles('./{deps.*,import*.json*}')}}
+
+      - name: "(env) checkout"
+        uses: actions/checkout@v3
+
+      - name: "(setup) 🦕 ${{matrix.deno}}"
+        uses: denoland/setup-deno@main
+        with:
+          deno-version: ${{matrix.deno}}
+
+      - name: "(cache) reload"
+        run: deno cache --reload --lock=lock.json --lock-write deps.ts
+
+      - name: "(run) fmt"
+        run: deno fmt --unstable
+
+      - name: "(run) lint"
+        run: deno lint --unstable
+
+      - name: "(run) test"
+        run: deno test -A --unstable --no-check

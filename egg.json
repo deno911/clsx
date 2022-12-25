@@ -1,0 +1,29 @@
+{
+  "$schema": "https://x.nest.land/eggs@0.3.10/src/schema.json",
+  "name": "kit",
+  "version": "0.0.1",
+  "description": "Opinionated starter kit for Deno modules.",
+  "homepage": "https://github.com/deno911/kit",
+  "repository": "https://github.com/deno911/kit",
+  "releaseType": "patch",
+  "bump": "patch",
+  "entry": "./mod.ts",
+  "check": true,
+  "checkAll": true,
+  "checkFormat": "deno fmt",
+  "checkTests": "deno test --unstable --no-check -A",
+  "checkInstallation": true,
+  "unstable": true,
+  "unlisted": false,
+  "files": [
+    "./LICENSE*",
+    "./README*",
+    "./PERMISSIONS*",
+    "./*.{ts,tsx,js,jsx,mjs,json,jsonc}"
+  ],
+  "ignore": [
+    "./.{devcontainer,github,vscode,githooks,git}/**",
+    "./.*",
+    "./test"
+  ]
+}

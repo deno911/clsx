@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# run tests
+deno test -A --unstable --no-check
+
+# format the code and commit it
+deno fmt
+
+# stage the formatted code
+git add .
+
+# commit any changed files
+{ git diff --quiet && git diff --staged --quiet; } || {
+  git commit -m ${COMMIT_MSG_FMT-"chore: format"}
+}
